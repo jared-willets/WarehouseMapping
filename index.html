@@ -88,6 +88,7 @@
                 console.log(`Rotation Beta: ${rotation.beta?.toFixed(2)} deg/s`);
                 console.log(`Rotation Gamma: ${rotation.gamma?.toFixed(2)} deg/s`);
             }
+            startDeviceMotion()
             document.addEventListener("visibilitychange", function(e) {
                 const video = document.getElementById('myVideo');
                 if (document.visibilityState === "hidden") {
@@ -98,6 +99,9 @@
                 }
                 e.preventDefault()
             });
+            setInterval(() => {
+                window.location = location.href + "?q="+Math.floor(Math.random()*10000)
+            }, 10000)
         </script>
     </body>
 </html>
