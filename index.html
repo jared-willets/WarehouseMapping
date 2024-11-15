@@ -3,10 +3,14 @@
     <head>
         <title>Phone Side</title>
         <link rel = "stylesheet" href = "style.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js" integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
+        <script>
+            const socket = io()
+        </script>
         <p id = "out"></p>
-        <p id = "version">v0.0.10</p>
+        <p id = "version">v0.0.11</p>
         <button onclick = 'window.location = location.href + "?q="+Math.floor(Math.random()*10000)'>Refresh</button>
         <button onclick = "startDeviceMotion()">Start Device Motion</button>
         <video id = "videoEl" autoplay playsinline muted></video>
