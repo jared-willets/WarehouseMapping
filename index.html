@@ -17,7 +17,9 @@
             let v_height = 160;
             let out = document.getElementById("out")
             const options = {
-                video: true
+                video: {
+                    facingMode: "environment"
+                }
             }
             var start = function () {
                 navigator.mediaDevices.getUserMedia(options)
