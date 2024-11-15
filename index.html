@@ -8,7 +8,7 @@
         <video id = "videoEl" autoplay playsinline muted></video>
         <canvas id= "canvas"></canvas>
         <p id = "out"></p>
-        <p id = "version">2</p>
+        <p id = "version">3</p>
         <script>
             let video = document.getElementById("videoEl")
             video.style.display = "none"
@@ -47,30 +47,30 @@
                 video.srcObject = null; 
             } 
             start()
-            if (window.DeviceMotionEvent) {
-                window.addEventListener('devicemotion', function(event) {
-                    // Acceleration without gravity
-                    const acc = event.acceleration;
-                    console.log(`Acceleration X: ${acc.x?.toFixed(2)} m/s²`);
-                    console.log(`Acceleration Y: ${acc.y?.toFixed(2)} m/s²`);
-                    console.log(`Acceleration Z: ${acc.z?.toFixed(2)} m/s²`);
-                    out.innerHTML = `${acc.x?.toFixed(2)}, ${acc.y?.toFixed(2)}, ${acc.z?.toFixed(2)}`
+            // if (window.DeviceMotionEvent) {
+            //     window.addEventListener('devicemotion', function(event) {
+            //         // Acceleration without gravity
+            //         const acc = event.acceleration;
+            //         console.log(`Acceleration X: ${acc.x?.toFixed(2)} m/s²`);
+            //         console.log(`Acceleration Y: ${acc.y?.toFixed(2)} m/s²`);
+            //         console.log(`Acceleration Z: ${acc.z?.toFixed(2)} m/s²`);
+            //         out.innerHTML = `${acc.x?.toFixed(2)}, ${acc.y?.toFixed(2)}, ${acc.z?.toFixed(2)}`
                     
-                    // Acceleration including gravity
-                    const accWithGravity = event.accelerationIncludingGravity;
-                    console.log(`Acceleration (With Gravity) X: ${accWithGravity.x?.toFixed(2)} m/s²`);
-                    console.log(`Acceleration (With Gravity) Y: ${accWithGravity.y?.toFixed(2)} m/s²`);
-                    console.log(`Acceleration (With Gravity) Z: ${accWithGravity.z?.toFixed(2)} m/s²`);
+            //         // Acceleration including gravity
+            //         const accWithGravity = event.accelerationIncludingGravity;
+            //         console.log(`Acceleration (With Gravity) X: ${accWithGravity.x?.toFixed(2)} m/s²`);
+            //         console.log(`Acceleration (With Gravity) Y: ${accWithGravity.y?.toFixed(2)} m/s²`);
+            //         console.log(`Acceleration (With Gravity) Z: ${accWithGravity.z?.toFixed(2)} m/s²`);
                     
-                    // Rotation rate
-                    const rotation = event.rotationRate;
-                    console.log(`Rotation Alpha: ${rotation.alpha?.toFixed(2)} deg/s`);
-                    console.log(`Rotation Beta: ${rotation.beta?.toFixed(2)} deg/s`);
-                    console.log(`Rotation Gamma: ${rotation.gamma?.toFixed(2)} deg/s`);
-                });
-            } else {
-                console.log('DeviceMotionEvent is not supported on this device or browser.');
-            }
+            //         // Rotation rate
+            //         const rotation = event.rotationRate;
+            //         console.log(`Rotation Alpha: ${rotation.alpha?.toFixed(2)} deg/s`);
+            //         console.log(`Rotation Beta: ${rotation.beta?.toFixed(2)} deg/s`);
+            //         console.log(`Rotation Gamma: ${rotation.gamma?.toFixed(2)} deg/s`);
+            //     });
+            // } else {
+            //     console.log('DeviceMotionEvent is not supported on this device or browser.');
+            // }
         </script>
     </body>
 </html>
