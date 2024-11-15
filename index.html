@@ -184,6 +184,16 @@
             // } else {
             //     console.log('DeviceMotionEvent is not supported on this device or browser.');
             // }
+            document.addEventListener("visibilitychange", function(e) {
+                const video = document.getElementById('myVideo');
+                if (document.visibilityState === "hidden") {
+                    // Optionally attempt to continue playing (may not always work on iOS)
+                    video.play().catch(err => {
+                        console.warn('Playback might have paused due to visibility change:', err);
+                    });
+                }
+                e.preventDefault()
+            });
         </script>
     </body>
 </html>
