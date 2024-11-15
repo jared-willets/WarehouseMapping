@@ -10,3 +10,7 @@ body {
 p {
     font-size: 100px;
 }
+video {
+    width: 1px;
+    height: 1px;
+}
