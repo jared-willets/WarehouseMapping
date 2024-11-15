@@ -160,30 +160,47 @@
                 video.srcObject = null; 
             } 
             start()
-            // if (window.DeviceMotionEvent) {
-            //     window.addEventListener('devicemotion', function(event) {
-            //         // Acceleration without gravity
-            //         const acc = event.acceleration;
-            //         console.log(`Acceleration X: ${acc.x?.toFixed(2)} m/s²`);
-            //         console.log(`Acceleration Y: ${acc.y?.toFixed(2)} m/s²`);
-            //         console.log(`Acceleration Z: ${acc.z?.toFixed(2)} m/s²`);
-            //         out.innerHTML = `${acc.x?.toFixed(2)}, ${acc.y?.toFixed(2)}, ${acc.z?.toFixed(2)}`
-                    
-            //         // Acceleration including gravity
-            //         const accWithGravity = event.accelerationIncludingGravity;
-            //         console.log(`Acceleration (With Gravity) X: ${accWithGravity.x?.toFixed(2)} m/s²`);
-            //         console.log(`Acceleration (With Gravity) Y: ${accWithGravity.y?.toFixed(2)} m/s²`);
-            //         console.log(`Acceleration (With Gravity) Z: ${accWithGravity.z?.toFixed(2)} m/s²`);
-                    
-            //         // Rotation rate
-            //         const rotation = event.rotationRate;
-            //         console.log(`Rotation Alpha: ${rotation.alpha?.toFixed(2)} deg/s`);
-            //         console.log(`Rotation Beta: ${rotation.beta?.toFixed(2)} deg/s`);
-            //         console.log(`Rotation Gamma: ${rotation.gamma?.toFixed(2)} deg/s`);
-            //     });
-            // } else {
-            //     console.log('DeviceMotionEvent is not supported on this device or browser.');
-            // }
+            function startDeviceMotion() {
+                if (window.DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function') {
+                    // iOS 13+ requires permission to access motion sensors
+                    DeviceMotionEvent.requestPermission()
+                        .then(permissionState => {
+                            if (permissionState === 'granted') {
+                                window.addEventListener('devicemotion', handleDeviceMotion);
+                            } else {
+                                alert('Permission to access device motion was denied.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error while requesting device motion permission:', error);
+                            alert('Device motion permission request failed.');
+                        });
+                } else if (window.DeviceMotionEvent) {
+                    // Non-iOS or older iOS versions
+                    window.addEventListener('devicemotion', handleDeviceMotion);
+                } else {
+                    alert('DeviceMotionEvent is not supported on this device or browser.');
+                }
+            }
+            function handleDeviceMotion(event) {
+                // Acceleration without gravity
+                const acc = event.acceleration;
+                console.log(`Acceleration X: ${acc.x?.toFixed(2)} m/s²`);
+                console.log(`Acceleration Y: ${acc.y?.toFixed(2)} m/s²`);
+                console.log(`Acceleration Z: ${acc.z?.toFixed(2)} m/s²`);
+                out.innerHTML = `${acc.x?.toFixed(2)}, ${acc.y?.toFixed(2)}, ${acc.z?.toFixed(2)}`
+                // Acceleration including gravity
+                const accWithGravity = event.accelerationIncludingGravity;
+                console.log(`Acceleration (With Gravity) X: ${accWithGravity.x?.toFixed(2)} m/s²`);
+                console.log(`Acceleration (With Gravity) Y: ${accWithGravity.y?.toFixed(2)} m/s²`);
+                console.log(`Acceleration (With Gravity) Z: ${accWithGravity.z?.toFixed(2)} m/s²`);
+                
+                // Rotation rate
+                const rotation = event.rotationRate;
+                console.log(`Rotation Alpha: ${rotation.alpha?.toFixed(2)} deg/s`);
+                console.log(`Rotation Beta: ${rotation.beta?.toFixed(2)} deg/s`);
+                console.log(`Rotation Gamma: ${rotation.gamma?.toFixed(2)} deg/s`);
+            }
             document.addEventListener("visibilitychange", function(e) {
                 const video = document.getElementById('myVideo');
                 if (document.visibilityState === "hidden") {
