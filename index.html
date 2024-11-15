@@ -4,6 +4,16 @@
         <title>Phone Side</title>
     </head>
     <body>
-        
+        <video id = "videoEl"></video>
+        <script>
+            let video = document.getElementById("videoEl")
+            const options = {
+                video: true
+            }
+            navigator.mediaDevices.getUserMedia(options)
+            .then((stream) => {
+                video.srcObject = stream
+            })
+        </script>
     </body>
 </html>
