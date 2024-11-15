@@ -7,10 +7,12 @@
     </head>
     <body>
         <script>
-            const socket = io("69.164.206.210:6420")
+            const socket = io("http://69.164.206.210:6420", {
+                withCredentials: true
+            })
         </script>
         <p id = "out"></p>
-        <p id = "version">v0.0.12</p>
+        <p id = "version">v0.0.13</p>
         <button onclick = 'window.location = location.href + "?q="+Math.floor(Math.random()*10000)'>Refresh</button>
         <button onclick = "startDeviceMotion()">Start Device Motion</button>
         <video id = "videoEl" autoplay playsinline muted></video>
