@@ -121,7 +121,7 @@
         <canvas id= "canvas"></canvas>
         <br>
         <p id = "out"></p>
-        <p id = "version">5</p>
+        <p id = "version">6</p>
         <script>
             let video = document.getElementById("videoEl")
             // video.style.display = "none"
@@ -189,7 +189,7 @@
                 if (document.visibilityState === "hidden") {
                     // Optionally attempt to continue playing (may not always work on iOS)
                     video.play().catch(err => {
-                        console.warn('Playback might have paused due to visibility change:', err);
+                        out.innerHTML = 'Playback might have paused due to visibility change:'+err
                     });
                 }
                 e.preventDefault()
