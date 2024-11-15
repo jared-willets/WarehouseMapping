@@ -2,11 +2,12 @@
 <html>
     <head>
         <title>Phone Side</title>
+        <link rel = "stylesheet" href = "style.css"/>
     </head>
     <body>
         <video id = "videoEl" autoplay></video>
-        <canvas id= "canvas">
-        </canvas>
+        <canvas id= "canvas"></canvas>
+        <p id = "out"></p>
         <script>
             let video = document.getElementById("videoEl")
             video.style.display = "none"
@@ -14,6 +15,7 @@
             let context = canvas.getContext('2d')
             let v_width = 320;
             let v_height = 160;
+            let out = document.getElementById("out")
             const options = {
                 video: true
             }
@@ -23,23 +25,49 @@
                     video.srcObject = stream
                     v_width = stream.getVideoTracks()[0].getSettings().width
                     v_height = stream.getVideoTracks()[0].getSettings().height
-                    canvas.width = v_width
-                    canvas.height = v_height
                 })
             }
+            canvas.width = window.innerWidth
+            canvas.height = Math.round(window.innerHeight * 0.8)
             setInterval(() => {
-                context.drawImage(video, 0, 0, v_width,v_height)
+                let x = -canvas.width/2
+                let y = canvas.height/2
+                context.drawImage(video, 0, 0, canvas.width,canvas.height)
             })
             var stop = function () { 
                 var stream = video.srcObject;
                 var tracks = stream.getTracks(); 
                 for (var i = 0; i < tracks.length; i++) { 
                     var track = tracks[i]; 
-                    track.stop(); 
+                    track.stop();
                 } 
                 video.srcObject = null; 
             } 
             start()
+            if (window.DeviceMotionEvent) {
+                window.addEventListener('devicemotion', function(event) {
+                    // Acceleration without gravity
+                    const acc = event.acceleration;
+                    console.log(`Acceleration X: ${acc.x?.toFixed(2)} m/s²`);
+                    console.log(`Acceleration Y: ${acc.y?.toFixed(2)} m/s²`);
+                    console.log(`Acceleration Z: ${acc.z?.toFixed(2)} m/s²`);
+                    out.innerHTML = `${acc.x?.toFixed(2)}, ${acc.y?.toFixed(2)}, ${acc.z?.toFixed(2)}`
+                    
+                    // Acceleration including gravity
+                    const accWithGravity = event.accelerationIncludingGravity;
+                    console.log(`Acceleration (With Gravity) X: ${accWithGravity.x?.toFixed(2)} m/s²`);
+                    console.log(`Acceleration (With Gravity) Y: ${accWithGravity.y?.toFixed(2)} m/s²`);
+                    console.log(`Acceleration (With Gravity) Z: ${accWithGravity.z?.toFixed(2)} m/s²`);
+                    
+                    // Rotation rate
+                    const rotation = event.rotationRate;
+                    console.log(`Rotation Alpha: ${rotation.alpha?.toFixed(2)} deg/s`);
+                    console.log(`Rotation Beta: ${rotation.beta?.toFixed(2)} deg/s`);
+                    console.log(`Rotation Gamma: ${rotation.gamma?.toFixed(2)} deg/s`);
+                });
+            } else {
+                console.log('DeviceMotionEvent is not supported on this device or browser.');
+            }
         </script>
     </body>
 </html>
