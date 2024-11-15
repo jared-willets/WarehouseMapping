@@ -13,4 +13,8 @@ p {
 video {
     width: 1px;
     height: 1px;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    left: 0;
 }
