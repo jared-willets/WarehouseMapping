@@ -6,7 +6,8 @@
     </head>
     <body>
         <p id = "out"></p>
-        <p id = "version">8</p>
+        <p id = "version">9</p>
+        <button onclick = 'window.location = location.href + "?q="+Math.floor(Math.random()*10000)'>Refresh</button>
         <video id = "videoEl" autoplay playsinline muted></video>
         <canvas id= "canvas"></canvas>
         <script>
@@ -99,9 +100,6 @@
                 }
                 e.preventDefault()
             });
-            setInterval(() => {
-                window.location = location.href + "?q="+Math.floor(Math.random()*10000)
-            }, 10000)
         </script>
     </body>
 </html>
