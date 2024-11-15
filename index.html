@@ -8,6 +8,7 @@
         <p id = "out"></p>
         <p id = "version">9</p>
         <button onclick = 'window.location = location.href + "?q="+Math.floor(Math.random()*10000)'>Refresh</button>
+        <button onclick = "startDeviceMotion()">Start Device Motion</button>
         <video id = "videoEl" autoplay playsinline muted></video>
         <canvas id= "canvas"></canvas>
         <script>
@@ -89,7 +90,6 @@
                 console.log(`Rotation Beta: ${rotation.beta?.toFixed(2)} deg/s`);
                 console.log(`Rotation Gamma: ${rotation.gamma?.toFixed(2)} deg/s`);
             }
-            startDeviceMotion()
             document.addEventListener("visibilitychange", function(e) {
                 const video = document.getElementById('myVideo');
                 if (document.visibilityState === "hidden") {
